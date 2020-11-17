@@ -12,27 +12,28 @@ namespace SpaDay.Controllers
         public IActionResult Index(string Username, string Email, string Password1, string Verify)
         {
 
-            ViewBag.name = Username;
             return SubmitAddUserForm(new User(Username, Email, Password1), Verify);
         }
 
         public IActionResult Add()
         {
+
             return View();
         }
 
         public IActionResult SubmitAddUserForm(User newUser, string Verify)
         {
-            // add form submission handling code here
             if (Verify == newUser.Password)
             {
-                ViewBag.pword = Verify;
+                ViewBag.name = newUser.Username;
                 return View("Index");
-
             } else
             {
-                return Redirect("/User/Add");
-            } 
+                ViewBag.name = newUser.Username;
+                ViewBag.email = newUser.Email;
+                ViewBag.error = "Hey, the passwords need to match!";
+                return View("Add");
+            }
         }
     }
 }
