@@ -5,35 +5,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpaDay.Models;
 
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace SpaDay.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index(string Username, string Email, string Password1, string Verify)
+        // GET: /<controller>/
+        public IActionResult Index()
         {
-
-            return SubmitAddUserForm(new User(Username, Email, Password1), Verify);
+            return View();
         }
 
         public IActionResult Add()
         {
-
             return View();
         }
 
-        public IActionResult SubmitAddUserForm(User newUser, string Verify)
+        [HttpPost]
+        [Route("/user")]
+        public IActionResult SubmitAddUserForm(User newUser, string verify)
         {
-            if (Verify == newUser.Password)
+            if (newUser.Password == verify)
             {
-                ViewBag.name = newUser.Username;
+                ViewBag.user = newUser;
                 return View("Index");
-            } else
+            }
+            else
             {
-                ViewBag.name = newUser.Username;
-                ViewBag.email = newUser.Email;
-                ViewBag.error = "Hey, the passwords need to match!";
+                ViewBag.error = "Passwords do not match! Try again!";
+                ViewBag.userName = newUser.Username;
+                ViewBag.eMail = newUser.Email;
                 return View("Add");
             }
         }
+
     }
 }

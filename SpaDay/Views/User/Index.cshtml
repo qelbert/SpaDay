@@ -1,11 +1,8 @@
-﻿@*User*@
+﻿@{
+}
 
-
-
-<h1>Success!</h1>
-
-<h2>Thank you @ViewBag.name for registering with us. It'll be our treat to treat <em>you</em> at your upcoming visit!</h2>
+<h1>Welcome to our spa, @ViewBag.user.Username!</h1>
 
 <p>
-    <a asp-controller="Spa" asp-action="Index">Home Page</a>
+    <a asp-controller="Spa" asp-action="Index">Select Spa Services</a>
 </p>

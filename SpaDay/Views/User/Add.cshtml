@@ -1,28 +1,42 @@
-﻿<h1>User Registration</h1>
+﻿@{
+}
 
-<p>@ViewBag.error</p>
+<h1>Sign Up Form</h1>
 
+@if (ViewBag.error != null)
+{
+    <p>@ViewBag.error</p>
+}
 
 <form method="post" action="/user">
-    <div class="registration-form-group">
-        <label>
-            User Name
-            <input type="text" name="Username" value="@ViewBag.name" class = "form-control" />
-        </label>
-        <label>
-            Email
-            <input type="email" name="Email" value="@ViewBag.email" class = "form-control"/>
-        </label>
-        <label>
-            Password
-            <input type="password" name="Password1" class = "form-control"/>
-        </label>
-        <label>
-            Confirm Password
-            <input type="password" name="Verify" class = "form-control"/>
-        </label>
-        <input type ="submit" value="Submit" />
-    </div>
+    Username:
+    <br>
+    @if (ViewBag.error == null)
+    {
+        <input type="text" name="username" />
+    }
+    else
+    {
+        <input type="text" name="username" value="@ViewBag.userName" />
+    }
+    <br>
+    Email:
+    <br>
+    @if (ViewBag.error == null)
+    {
+        <input type="email" name="email" />
+    }
+    else
+    {
+        <input type="email" name="email" value="@ViewBag.eMail" />
+    }
+    <br>
+    Password:
+    <input type="password" name="password" />
+    <br>
+    Confirm Password:
+    <br>
+    <input type="password" name="verify" />
+    <br>
+    <input type='submit' value='Submit'>
 </form>
-
-
